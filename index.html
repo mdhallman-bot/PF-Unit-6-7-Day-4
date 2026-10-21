@@ -1,0 +1,173 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Units 6/7 Day 4 — What Is the Job Really Worth?</title><style>
+:root{--ink:#15263d;--blue:#234a70;--soft:#edf4f8;--gold:#a76e13;--green:#246946;--line:#ced8e1}*{box-sizing:border-box}body{max-width:1000px;margin:auto;padding:18px;font:16px/1.55 system-ui,Arial;color:var(--ink)}h1,h2,h3{line-height:1.2}h1{font-size:1.8rem}h2{margin-top:34px;border-bottom:3px solid #d9b065;padding-bottom:6px}h3{font-size:1.08rem}table{border-collapse:collapse;width:100%;margin:12px 0}th,td{border:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}th{background:var(--soft)}.panel{background:var(--soft);border-left:4px solid var(--blue);border-radius:6px;padding:13px 16px;margin:12px 0}.notice{background:#fff7e6;border-left-color:var(--gold)}.stop{border:3px solid var(--gold);border-radius:8px;padding:12px;margin:18px 0;font-weight:700}.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{border:1px solid var(--line);border-radius:8px;padding:15px}input,select,textarea{font:inherit;border:1px solid #9eacb9;border-radius:5px;padding:7px;background:white;max-width:100%}input[type=number]{width:145px}input[type=text]{width:100%}textarea{width:100%;min-height:65px;resize:vertical}button{background:var(--blue);border:0;color:white;padding:9px 14px;margin:4px 5px 4px 0;border-radius:5px;cursor:pointer;font:inherit}button.secondary{background:#5c6b7a}button.emergency{background:#7e482a}button:disabled{opacity:.5;cursor:not-allowed}a{color:#125a90}.hint{color:#465568;font-size:.89rem}.vocab{border-bottom:2px dotted #a76e13;cursor:help;text-decoration:none}.vocab:focus{outline:2px solid #1470b0}.vocab:focus:after,.vocab:hover:after{content:attr(data-def);display:inline-block;background:#142b42;color:white;padding:7px;border-radius:5px;max-width:310px;font-size:.8rem;margin-left:5px;vertical-align:middle}.feedback{font-size:.9rem;font-weight:650;margin-left:6px}.ok{color:#11683e}.bad{color:#a43725}.tiny{font-size:.81rem}.progress{padding:12px;border:1px solid #ccd8e3;background:#f9fbfc;border-radius:6px}#workspace{display:none}#report{display:none}@media(max-width:650px){.cols,.cards{grid-template-columns:1fr}table{font-size:.88rem}th,td{padding:5px}}@media print{body{max-width:none;padding:0;font-size:11pt}body>*:not(#report){display:none!important}#report{display:block!important}#report h2{break-after:avoid}#report table{font-size:9pt}#report td{overflow-wrap:anywhere}#report section{break-inside:avoid}a{color:black;text-decoration:none}}
+</style></head><body><header><h1>Units 6/7 · Day 4: What Is the Job Really Worth?</h1><p><strong>Essential question:</strong> How can I compare a job's pay, benefits, predictability, and growth opportunities?</p><div class="panel notice">Use your assigned <strong>student code</strong>, not your real name. Work in each section when your teacher directs you. Your device saves a local backup automatically; a Google Sheets copy is available only when your teacher configures the class server. Submit for Review → Save/Print PDF → upload your PDF to Classroom. No AI coaching or grading is used.</div></header>
+<section id="gate" class="panel"><label for="idInput"><strong>Assigned student code</strong></label><br><input id="idInput" type="text" autocomplete="off" placeholder="e.g. Falcon217" style="width:230px"><button id="startBtn" onclick="startSession()">Start / Load my work</button><div id="gateMessage" role="status"></div></section>
+<main id="workspace"><div id="conflictPanel" class="panel notice" hidden role="alert"><strong>Two saved copies found.</strong><p id="conflictDetail"></p><p>Neither version will be deleted automatically. Choose one whole copy to continue; a device recovery backup is also retained.</p><button type="button" onclick="resolveConflict('local')">Keep this device's work</button> <button type="button" onclick="resolveConflict('remote')">Load class sheet's work</button> <button type="button" onclick="printReport(true)">Print device backup before deciding</button></div><div class="progress"><strong>Session:</strong> <span id="studentCode"></span> · <span id="saveStatus" role="status">Local backup ready</span> <button class="secondary" onclick="changeCode()">Change student code</button></div>
+<h2>1 · Do Now: Which offer?</h2><p>Two jobs in the same field: Offer A pays <strong>$60,000</strong> and Offer B pays <strong>$54,000</strong>. Which would you choose with only that information?</p><label><select data-save id="firstPick"><option value="">Choose...</option><option>A</option><option>B</option><option>Cannot decide yet</option></select></label><label for="firstWhy">What additional information do you need?</label><textarea data-save id="firstWhy" placeholder="I need to know..."></textarea><div class="stop">STOP 1 · Discuss before revealing the complete offers.</div>
+<h2>2 · Where does personal income come from?</h2><p>Work with a partner to classify each example. Then compare how predictable the sources might be. Hover/tap the dotted words for definitions.</p><div class="panel">A <span class="vocab" tabindex="0" data-def="a source or origin of something">source</span> of income describes <em>how</em> money is obtained. <span class="vocab" tabindex="0" data-def="likely to behave in an expected or consistent way">Predictable</span> does not mean guaranteed.</div><table><thead><tr><th>Example</th><th>Income source</th></tr></thead><tbody id="incomeRows"></tbody></table><button onclick="checkIncome()">Check classifications</button><span id="incomeResult" class="feedback" role="status"></span><div class="panel"><strong>Compare:</strong> Maya receives wages at a clinic, interest from savings, and a gain when she sells stock. Which source depends most directly on working hours? Which happens only when she sells an asset at a gain?</div><div class="cols"><label>Depends directly on working hours<select data-save id="sourceWork"><option value="">Choose</option><option>Earned income</option><option>Interest income</option><option>Capital gains</option></select></label><label>Requires selling an asset for a profit<select data-save id="sourceSale"><option value="">Choose</option><option>Earned income</option><option>Interest income</option><option>Capital gains</option></select></label></div><button onclick="checkSourceCompare()">Check comparison</button><span class="feedback" id="sourceCompareFeedback"></span><div class="stop">STOP 2 · Class debrief: income sources are not equally reliable, automatic, or guaranteed.</div>
+<h2>3 · The compensation beyond salary</h2><div class="panel">Watch <a target="_blank" rel="noopener" href="https://www.pbs.org/video/how-to-weigh-job-benefits-yeowqg/">PBS Two Cents: How to Weigh Job Benefits (9:08)</a>. What would you ask before accepting the higher salary?</div><label for="video1">Two considerations the video raised</label><textarea data-save id="video1"></textarea><p><strong>Guided notes:</strong> <span class="vocab" tabindex="0" data-def="Wages or salary plus employer-paid benefits and other job-related compensation">total compensation</span> is broader than pay alone. <span class="vocab" tabindex="0" data-def="Payment before taxes and deductions">Gross pay</span> is not the same as spendable <span class="vocab" tabindex="0" data-def="Money remaining after taxes and paycheck deductions">take-home pay</span>.</p><table><thead><tr><th>Term</th><th>Use it to explain the offers</th></tr></thead><tbody><tr><td><span class="vocab" tabindex="0" data-def="Amount an employee pays regularly to keep insurance coverage">Employee health premium</span></td><td>Regular cost paid by the worker; may be deducted from paycheck</td></tr><tr><td><span class="vocab" tabindex="0" data-def="Amount an employer adds to a worker's retirement plan under stated plan rules">Employer retirement contribution</span></td><td>Valuable compensation, but not current spending cash</td></tr><tr><td><span class="vocab" tabindex="0" data-def="Paid time away from work, such as vacation or certain sick days">Paid time off (PTO)</span></td><td>Value through time and continuing pay; do not automatically add it on top of annual salary</td></tr><tr><td><span class="vocab" tabindex="0" data-def="An amount paid out of pocket before certain insurance benefits pay, depending on plan details">Deductible</span></td><td>Potential cost if covered care is used, not a guaranteed annual bill</td></tr><tr><td><span class="vocab" tabindex="0" data-def="Insurance that can replace part of earnings when a qualifying illness or injury prevents working">Disability coverage</span></td><td>Protection against loss of income; terms and exclusions matter</td></tr></tbody></table>
+<h2>4 · Job Offer Challenge: A versus B</h2><p><strong>Fictional offers for the same worker.</strong> Assume comparable duties and the same work region. All amounts are illustrative, not actual postings.</p><div class="cards"><div class="card"><h3>Offer A · Ridgeway Services</h3><strong>$60,000 annual salary</strong><p>Employee health premiums: $3,600/year<br>Employer retirement: $0/year<br>PTO: 10 paid days<br>Schedule: on-site, fixed hours<br>Training: limited<br>Disability coverage: not provided</p></div><div class="card"><h3>Offer B · Summit Community Partners</h3><strong>$54,000 annual salary</strong><p>Employee health premiums: $1,200/year<br>Employer retirement: automatic 4% of salary ($2,160/year), subject to plan eligibility<br>PTO: 20 paid days<br>Schedule: hybrid<br>Training: eligible for employer-funded certification<br>Disability coverage: employer-provided, subject to policy terms</p></div></div><p><strong>Show your math.</strong> Type numbers without dollar signs. The 'salary minus health premiums' comparison is <em>before income taxes, retirement employee contributions, and other deductions</em>; it is NOT net pay.</p><table><thead><tr><th>Calculation</th><th>Offer A</th><th>Offer B</th></tr></thead><tbody><tr><td>Salary less annual employee health premium</td><td><input data-save id="aAfter" type="number" step="any"></td><td><input data-save id="bAfter" type="number" step="any"></td></tr><tr><td>Annual employer retirement contribution</td><td><input data-save id="aRetire" type="number" step="any"></td><td><input data-save id="bRetire" type="number" step="any"></td></tr><tr><td>Salary + employer retirement contribution (NOT take-home pay)</td><td><input data-save id="aCombined" type="number" step="any"></td><td><input data-save id="bCombined" type="number" step="any"></td></tr></tbody></table><button onclick="checkOffers()">Check compensation math</button><span class="feedback" id="offerFeedback"></span><label for="offerDecision">Recommend A or B for a worker who values stable health expenses, additional PTO and career growth. Justify using a number and a nonmoney tradeoff (2–3 sentences).</label><textarea data-save id="offerDecision"></textarea><p class="hint">Sentence frame: Although __ has a higher salary, __ might be better for this worker because __. The calculation shows __; the tradeoff is __.</p><div class="stop">STOP 3 · Show your calculation and discuss tradeoffs before the hourly reveal.</div>
+<h2>5 · Surprise Offer C: Aurora Restaurant Server</h2><div class="panel"><strong>Fictional position: Server at Juniper Table in Aurora, Colorado.</strong> For the 2026 classroom scenario, base cash wage is <strong>$12.14/hour</strong> plus tips. Slow week: 25 hours + $90 tips. Busy week: 40 hours + $350 tips. The job offers varying shifts, no employer retirement contribution, and no employer-sponsored health insurance. Tips and shift availability fluctuate; amounts are not guaranteed. The scenario uses the <strong>2026 Colorado tipped cash minimum</strong>, assuming the employer lawfully takes the permitted tip credit and no higher local requirement applies. Employers must meet applicable minimum wage rules; tip-credit rules and overtime eligibility matter. <a href="https://cdle.colorado.gov/dlss" target="_blank" rel="noopener">Colorado labor standards reference</a>.</div><table><thead><tr><th>Calculation</th><th>Your result</th></tr></thead><tbody><tr><td>Slow-week gross = (25 × 12.14) + 90</td><td><input data-save id="cSlow" type="number" step="any"></td></tr><tr><td>Busy-week gross = (40 × 12.14) + 350</td><td><input data-save id="cBusy" type="number" step="any"></td></tr><tr><td>Illustrative 52-week slow-case annual income</td><td><input data-save id="cAnnualSlow" type="number" step="any"></td></tr><tr><td>Illustrative 52-week busy-case annual income</td><td><input data-save id="cAnnualBusy" type="number" step="any"></td></tr></tbody></table><button onclick="checkServer()">Check server calculations</button><span id="serverFeedback" class="feedback"></span><p class="hint">These annual scenarios assume the same slow or busy pattern occurs every week for 52 paid working weeks. In real life, shifts, tips, unpaid days, and taxes change earnings. The busy week is exactly 40 hours: no overtime premium is assumed.</p><label for="cReason">Why is choosing the highest possible gross earnings figure risky?</label><textarea data-save id="cReason"></textarea><div class="stop">STOP 4 · MOVE: Your teacher reveals a worker profile. Pick A, B, or C and defend it; record your final choice below.</div><label>My MOVE choice<select data-save id="moveChoice"><option value="">Select</option><option>A</option><option>B</option><option>C</option></select></label><label for="moveWhy">One reason tied to the worker profile</label><textarea data-save id="moveWhy"></textarea>
+<h2>6 · Skills, raises, and career advancement</h2><p>Watch <a href="https://www.pbs.org/video/how-to-ask-for-a-raise-fyblxg/" target="_blank" rel="noopener">PBS Two Cents: How to Ask for a Raise (5:35)</a>. A worker is offered free certification training that <em>may</em> qualify them for a $4,000 annual raise. This is not a guaranteed promotion.</p><label>Potential new salary if the worker currently earns $54,000 and receives the full raise: <input data-save id="raiseMath" type="number" step="any"></label><button onclick="checkRaise()">Check raise math</button><span class="feedback" id="raiseFeedback"></span><label for="raiseReason">What would you verify before treating the possible raise as certain?</label><textarea data-save id="raiseReason"></textarea>
+<h2>7 · My Career, My Compensation</h2><p>Bring forward your own pathway from Days 1–3. No real name, family finances, or identifying details are needed. If your pathway involves self-employment, note that traditional employer benefits may be unavailable.</p><div class="cols"><label>Career/pathway<input data-save id="myCareer" type="text"></label><label>Region<input data-save id="myRegion" type="text"></label></div><label>Previously researched approximate starting annual earnings (enter number, or leave blank if unknown)<input data-save id="mySalary" type="number" step="any"></label><label>Which benefit, schedule feature, or advancement opportunity matters most to you?<select data-save id="myPriority"><option value="">Choose</option><option>Health coverage</option><option>Disability coverage</option><option>Retirement contributions</option><option>Paid time off</option><option>Predictable schedule</option><option>Employer-funded training</option><option>Different: self-employment considerations</option></select></label><label for="myQuestion">One specific question I would ask an employer (or myself as a self-employed worker) before accepting this pathway</label><textarea data-save id="myQuestion"></textarea><p class="hint">Optional extension: check an employer benefits webpage or real posting and record what is confirmed versus missing. Do not invent numbers.</p>
+<h2>8 · Two-minute Tier 3 vocabulary match</h2><p>Match five definitions to terms from today's work. This checks understanding; it is not a separate test grade.</p><table><thead><tr><th>Definition</th><th>Match</th></tr></thead><tbody id="vocabRows"></tbody></table><button onclick="checkVocab()">Check 5 matches</button><span id="vocabResult" class="feedback"></span>
+<h2>9 · Submit and Save PDF</h2><div class="panel"><strong>Success criteria for my job recommendation:</strong> <label><input data-save type="checkbox" id="selfMoney"> I used at least one accurate number.</label><br><label><input data-save type="checkbox" id="selfNonmoney"> I identified a nonmonetary tradeoff.</label><br><label><input data-save type="checkbox" id="selfContext"> I connected my decision to a worker's circumstances.</label></div><button onclick="submitReview()">Submit for Review</button><button onclick="printReport()" id="pdfBtn" disabled>Save / Print PDF</button><button class="emergency" onclick="printReport(true)">Emergency PDF / print backup</button><div class="panel" role="status" id="reviewResult">Finish the sections and submit for a completion review. If syncing or review fails, use the Emergency backup and upload it to Classroom.</div><p class="tiny">Classroom submission: one PDF with completion status at the top, then your work in lesson order. Local backup is stored in this browser for this student code. Clearing browser data can erase that local copy.</p></main><article id="report"></article>
+<script>
+'use strict';
+// Reliable dual persistence. This tool NEVER sends responses to any AI provider.
+const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbxUXogxQLQ9c82X12cBhEqxdctUJujviT6JHUjW49q9fAHsIlMmR-pNmPTFRQqbiFmO/exec'; // Paste the deployed Google Apps Script /exec URL here.
+const CLASS_SECRET = 'day4-units67-2026'; // Must match Apps Script CLASS_TOKEN if customized.
+const LOCAL_PREFIX='pf_u67_d4_';
+let lockedId='', submitted=false,lastReview='',saveTimer=null;
+let localRevision=0, savedRevision=0,serverVersion=0, serverReady=false, syncBusy=false;
+let forcePending=false, unresolvedConflict=null, generation=0;
+const $=id=>document.getElementById(id);
+const income=[['A worker earns $600 for shifts at a clinic','Earned income'],['A small-business owner receives money left after business expenses','Profit income'],['A credit union pays $12 on a savings balance','Interest income'],['A company distributes $45 to shareholders','Dividend income'],['A landlord receives $900 rent from a tenant','Rental income'],['A person sells stock for $300 more than its purchase cost','Capital gains'],['A songwriter receives payment when their music is licensed','Royalties']];
+const vocab=[['Pay before taxes and deductions','Gross pay'],['Wages/salary plus employer-provided compensation','Total compensation'],['Regular amount the worker pays for insurance coverage','Employee premium'],['Employer money added to a worker retirement plan','Employer contribution'],['Paid days away from work','Paid time off']];
+const vocabOptions=['','Gross pay','Total compensation','Employee premium','Employer contribution','Paid time off'];
+function norm(s){return String(s||'').trim().toLowerCase()}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function key(){return LOCAL_PREFIX+norm(lockedId)}
+function localData(){return {id:lockedId,modified:new Date().toISOString(),revision:localRevision,savedRevision,serverVersion,answers:collect(),submitted,lastReview}}
+function showStatus(text){$('saveStatus').textContent=text}
+function saveLocal(){
+  if(!lockedId)return false;
+  try {localStorage.setItem(key(),JSON.stringify(localData()));showStatus(BACKEND_URL?'Saved on device · waiting for class sheet':'Saved on this device · '+new Date().toLocaleTimeString());return true}
+  catch(e){showStatus('DEVICE SAVE FAILED — use Emergency PDF now');return false}
+}
+function restoreLocal(data){
+  restore(data.answers||{});submitted=!!data.submitted;lastReview=String(data.lastReview||'');
+  localRevision=Number(data.revision)||0;savedRevision=Number(data.savedRevision)||0;serverVersion=Number(data.serverVersion)||0;
+}
+function changed(){
+  if(!lockedId)return;localRevision++;submitted=false;$('pdfBtn').disabled=true;
+  saveLocal();clearTimeout(saveTimer);saveTimer=setTimeout(()=>{flushSync().catch(()=>{})},750);
+}
+function scheduleSave(){changed()}
+const delay=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+async function serverCall(action,data,id=lockedId){
+  if(!BACKEND_URL)throw Error('Class synchronization has not been configured');
+  let last;
+  for(let attempt=0;attempt<4;attempt++){
+    try{
+      const response=await fetch(BACKEND_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify({action,id,secret:CLASS_SECRET,...data}),redirect:'follow'});
+      const raw=await response.text();let result;
+      try{result=JSON.parse(raw)}catch(e){throw Error('Class server returned an unexpected response')}
+      if(!response.ok)throw Error('HTTP '+response.status);
+      if(result.conflict)return result;
+      if(result.ok===false||result.error){const err=Error(result.error||'Save failed');err.permanent=true;throw err}
+      return result;
+    }catch(err){last=err;if(err.permanent)break;if(attempt<3)await delay(650*(2**attempt)+Math.floor(Math.random()*300))}
+  }
+  throw last;
+}
+function createRequestId(){return 'r-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,13)}
+async function reconnect(){
+  if(!lockedId||!BACKEND_URL||serverReady||unresolvedConflict)return;
+  const id=lockedId,gen=generation;
+  const remote=await serverCall('load_state',{},id);
+  if(gen!==generation||id!==lockedId)return;
+  if(remote.found){
+    // A local edit made since the last server acknowledgement must never be discarded silently.
+    if(localRevision>savedRevision || (serverVersion!==remote.version && localRevision>0)){
+      unresolvedConflict=remote;showConflict(remote);return;
+    }
+    restore(remote.answers||{});submitted=!!remote.submitted;lastReview=remote.lastReview||'';
+    serverVersion=remote.version;localRevision=0;savedRevision=0;
+  }else if(serverVersion>0){
+    unresolvedConflict=remote;showConflict(remote);return;
+  }
+  serverReady=true;saveLocal();$('pdfBtn').disabled=!submitted;
+  if(submitted)$('reviewResult').textContent=lastReview||'Previously reviewed.';
+}
+function showConflict(remote){
+  unresolvedConflict=remote;showStatus('SAVE CONFLICT — both copies preserved');
+  const el=$('conflictPanel');el.hidden=false;
+  $('conflictDetail').textContent=remote.found?
+   `The class sheet has version ${remote.version}; this device has unsynchronized work. Choose which entire copy to use.`:
+   'The prior class-sheet record is unavailable. Keep this device work to create a new server copy.';
+}
+function resolveConflict(choice){
+  if(!unresolvedConflict)return;
+  const remote=unresolvedConflict;
+  // Local work remains stored in a separate recovery key regardless of choice.
+  try{localStorage.setItem(key()+'_recovery_'+Date.now(),JSON.stringify(localData()))}catch(e){}
+  serverVersion=Number(remote.version)||0;
+  if(choice==='remote'){
+    restore(remote.answers||{});submitted=!!remote.submitted;lastReview=remote.lastReview||'';
+    localRevision=0;savedRevision=0;
+  }else{localRevision=Math.max(1,localRevision);savedRevision=0;}
+  unresolvedConflict=null;$('conflictPanel').hidden=true;serverReady=true;saveLocal();
+  $('pdfBtn').disabled=!submitted;
+  if(submitted)$('reviewResult').textContent=lastReview;
+  if(choice==='local')flushSync().catch(()=>{});
+}
+async function flushSync(){
+  if(!lockedId||!BACKEND_URL||syncBusy||unresolvedConflict)return;
+  syncBusy=true;const gen=generation,id=lockedId;
+  try{
+    if(!serverReady)await reconnect();
+    if(!serverReady||gen!==generation)return;
+    while(localRevision>savedRevision || forcePending){
+      const rev=localRevision,requestId=createRequestId(),snapshot={answers:collect(),submitted,lastReview,baseVersion:serverVersion,requestId};
+      forcePending=false;
+      const result=await serverCall('save_state',snapshot,id);
+      if(gen!==generation||id!==lockedId)return;
+      if(result.conflict){serverReady=false;showConflict(result.server);return}
+      serverVersion=result.version;savedRevision=rev;
+      if(!saveLocal())return;
+      showStatus(localRevision===savedRevision?'Saved on device + class sheet':'Saved to sheet; newer edits pending');
+    }
+  }catch(e){if(gen===generation){showStatus('Saved on device; class sheet offline — will retry');}}
+  finally{syncBusy=false}
+}
+function initTables(){
+  const opt=['','Earned income','Profit income','Interest income','Dividend income','Rental income','Capital gains','Royalties'];
+  $('incomeRows').innerHTML=income.map((x,i)=>`<tr><td>${esc(x[0])}</td><td><select data-save id="income${i}">${opt.map(o=>`<option>${esc(o)}</option>`).join('')}</select></td></tr>`).join('');
+  $('vocabRows').innerHTML=vocab.map((v,i)=>`<tr><td>${esc(v[0])}</td><td><select data-save id="vocab${i}">${vocabOptions.map(o=>`<option>${esc(o)}</option>`).join('')}</select></td></tr>`).join('');
+  document.querySelectorAll('[data-save]').forEach(e=>{e.addEventListener('input',changed);e.addEventListener('change',changed)});
+  window.addEventListener('online',()=>flushSync().catch(()=>{}));
+  document.addEventListener('visibilitychange',()=>{if(document.hidden){clearTimeout(saveTimer);saveLocal()}else flushSync().catch(()=>{})});
+  setInterval(()=>{if(lockedId&&BACKEND_URL&&(localRevision>savedRevision||!serverReady||forcePending))flushSync().catch(()=>{})},12000);
+}
+function collect(){const out={};document.querySelectorAll('[data-save]').forEach(e=>{out[e.id]=e.type==='checkbox'?e.checked:e.value});return out}
+function restore(d){if(!d||typeof d!=='object')return;document.querySelectorAll('[data-save]').forEach(e=>{if(Object.prototype.hasOwnProperty.call(d,e.id)){if(e.type==='checkbox')e.checked=!!d[e.id];else e.value=d[e.id]}})}
+async function startSession(){
+  const id=String($('idInput').value||'').trim();
+  if(!/^[a-z0-9_-]{4,25}$/i.test(id)){$('gateMessage').textContent='Enter your assigned code (4–25 letters, numbers, underscores, or hyphens).';return}
+  lockedId=id;generation++;$('studentCode').textContent=id;$('idInput').disabled=true;$('startBtn').disabled=true;$('workspace').style.display='block';
+  let local=null;try{local=JSON.parse(localStorage.getItem(key())||'null')}catch(e){}
+  if(local)restoreLocal(local);
+  if(BACKEND_URL){
+    try{await reconnect()}catch(e){showStatus('Local backup loaded; class server unavailable — reconnecting automatically')}
+  }else showStatus('Local-only mode — teacher has not configured class sheet');
+  $('pdfBtn').disabled=!submitted;if(submitted)$('reviewResult').textContent=lastReview||'Previously reviewed.';
+  saveLocal();
+}
+function changeCode(){
+  if(!confirm('Switch student codes? A local copy is retained. Upload an emergency PDF if the class-sheet save is pending.'))return;
+  clearTimeout(saveTimer);saveLocal();generation++;lockedId='';submitted=false;lastReview='';localRevision=0;savedRevision=0;serverVersion=0;serverReady=false;unresolvedConflict=null;forcePending=false;
+  $('conflictPanel').hidden=true;$('idInput').disabled=false;$('idInput').value='';$('startBtn').disabled=false;$('workspace').style.display='none';$('gateMessage').textContent='Enter the next assigned code, then Start / Load.';
+}
+function checkSet(pairs,output){let right=0,done=0;for(const [id,correct]of pairs){const el=$(id),v=el.value;if(v!=='')done++;if(v!==''&&Math.abs(Number(v)-correct)<.015)right++}$(output).textContent=`${right}/${pairs.length} correct (${done}/${pairs.length} attempted). ${right===pairs.length?'Ready!':'Check your calculations and try again.'}`;$(output).className='feedback '+(right===pairs.length?'ok':'bad');saveLocal()}
+function checkIncome(){let count=0;income.forEach((q,i)=>{if($('income'+i).value===q[1])count++});$('incomeResult').textContent=`${count}/7 correct. ${count===7?'Great!':'Reconsider the way each person generates money.'}`;saveLocal()}
+function checkSourceCompare(){const ok=$('sourceWork').value==='Earned income'&&$('sourceSale').value==='Capital gains';$('sourceCompareFeedback').textContent=ok?'Both correct.':'Check whether the income depends on work or selling an investment at a gain.';saveLocal()}
+function checkOffers(){checkSet([['aAfter',56400],['bAfter',52800],['aRetire',0],['bRetire',2160],['aCombined',60000],['bCombined',56160]],'offerFeedback')}
+function checkServer(){checkSet([['cSlow',393.5],['cBusy',835.6],['cAnnualSlow',20462],['cAnnualBusy',43451.2]],'serverFeedback')}
+function checkRaise(){checkSet([['raiseMath',58000]],'raiseFeedback')}
+function checkVocab(){let right=0;vocab.forEach((v,i)=>{if($('vocab'+i).value===v[1])right++});$('vocabResult').textContent=`${right}/5 correct. ${right<5?'Use the hover definitions and retry.':'Ready for submission.'}`;saveLocal()}
+function completion(){const a=collect(),has=(id,min=1)=>String(a[id]??'').trim().length>=min;return [['Do Now',has('firstPick')&&has('firstWhy',8)],['Income source classification + comparison',income.every((q,i)=>has('income'+i))&&has('sourceWork')&&has('sourceSale')],['Benefits video notes',has('video1',12)],['A/B compensation math + decision',['aAfter','bAfter','aRetire','bRetire','aCombined','bCombined'].every(k=>has(k))&&has('offerDecision',35)],['Aurora server and MOVE',['cSlow','cBusy','cAnnualSlow','cAnnualBusy'].every(k=>has(k))&&has('cReason',15)&&has('moveChoice')&&has('moveWhy',10)],['Advancement',has('raiseMath')&&has('raiseReason',12)],['My career link',has('myCareer')&&has('myRegion')&&has('myPriority')&&has('myQuestion',12)],['Tier 3 vocabulary match',vocab.every((v,i)=>has('vocab'+i))],['Decision self-check',!!a.selfMoney&&!!a.selfNonmoney&&!!a.selfContext]]}
+async function submitReview(){
+  if(!lockedId)return;
+  const c=completion(),count=c.filter(x=>x[1]).length;
+  lastReview=`Completion: ${count}/${c.length} sections. ${count===c.length?'All sections complete.':'Still needed: '+c.filter(x=>!x[1]).map(x=>x[0]).join('; ')}. Accuracy is checked separately using Check buttons. No AI grading.`;
+  submitted=true;localRevision++;forcePending=true;saveLocal();$('pdfBtn').disabled=false;
+  $('reviewResult').textContent=lastReview+' Work is saved on this device. '+(BACKEND_URL?'Class-sheet synchronization may still be pending.':'Class-sheet sync is not configured.');
+  clearTimeout(saveTimer);await flushSync();
+  if(BACKEND_URL&&serverReady&&savedRevision===localRevision)$('reviewResult').textContent=lastReview+' Class-sheet save confirmed.';
+}
+function reportHTML(emergency){const c=completion(),n=c.filter(x=>x[1]).length,a=collect();const sections=[['1. Do Now',[['First choice','firstPick'],['What I need to know','firstWhy']]],['2. Income classification',income.map((q,i)=>[q[0],'income'+i]).concat([['Work-linked source','sourceWork'],['Selling at a gain','sourceSale']])],['3. Benefits video',[['What the video raised','video1']]],['4. A/B job offers',[['A salary less premiums','aAfter'],['B salary less premiums','bAfter'],['A employer retirement','aRetire'],['B employer retirement','bRetire'],['A salary + employer retirement','aCombined'],['B salary + employer retirement','bCombined'],['My decision','offerDecision']]],['5. Aurora server and MOVE',[['Slow-week gross','cSlow'],['Busy-week gross','cBusy'],['52-week slow','cAnnualSlow'],['52-week busy','cAnnualBusy'],['Income uncertainty','cReason'],['MOVE decision','moveChoice'],['MOVE evidence','moveWhy']]],['6. Advancement',[['Potential salary','raiseMath'],['What to verify','raiseReason']]],['7. My career',[['Career','myCareer'],['Region','myRegion'],['Prior starting salary','mySalary'],['Priority','myPriority'],['Employer question','myQuestion']]],['8. Vocabulary',vocab.map((q,i)=>[q[0],'vocab'+i])]];return `<h1>Units 6/7 — Day 4: What Is the Job Really Worth?</h1><p><strong>Student code:</strong> ${esc(lockedId)} · <strong>Report:</strong> ${new Date().toLocaleString()}${emergency?' · EMERGENCY BACKUP':''}</p><h2>COMPLETION REPORT — ${n}/${c.length}</h2><p>${esc(lastReview||'Emergency report; Submit for Review was not completed or may be unavailable.')}</p><p><strong>Class-sheet sync:</strong> ${!BACKEND_URL?'NOT CONFIGURED':(savedRevision===localRevision&&serverReady?'CONFIRMED':'PENDING / UNAVAILABLE — local copy preserved')}</p><table><tr><th>Section</th><th>Status</th></tr>${c.map(x=>`<tr><td>${esc(x[0])}</td><td>${x[1]?'COMPLETE':'INCOMPLETE'}</td></tr>`).join('')}</table><p><strong>Self-check:</strong> Number evidence ${a.selfMoney?'yes':'no'} · Nonmoney tradeoff ${a.selfNonmoney?'yes':'no'} · Worker context ${a.selfContext?'yes':'no'}.</p>${sections.map(s=>`<section><h2>${esc(s[0])}</h2><table>${s[1].map(p=>`<tr><th style="width:38%">${esc(p[0])}</th><td>${esc(a[p[1]]??'—').replace(/\n/g,'<br>')}</td></tr>`).join('')}</table></section>`).join('')}`}
+function printReport(emergency=false){if(!lockedId){alert('Start a student-code session first');return}saveLocal();$('report').innerHTML=reportHTML(emergency);window.print()}
+
+initTables();
+</script></body></html>
